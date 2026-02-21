@@ -1,15 +1,22 @@
 import psycopg2
+from src.config import DB_HOST, DB_PORT, DB_NAME, DB_USER, DB_PASSWORD, TOP_K
 from src.embeddings import embed
 
+print("Connecting to PostgreSQL...")
+
 conn = psycopg2.connect(
-    host="localhost",
-    port=5433,
-    database="medical_ai",
-    user="postgres",
-    password="postgres"
+    host=DB_HOST,
+    port=DB_PORT,
+    database=DB_NAME,
+    user=DB_USER,
+    password=DB_PASSWORD
 )
 
-def search_protocols(symptoms):
+conn.autocommit = True
+
+print("Connected to PostgreSQL.")
+
+def search_protocols(symptoms: str):
 
     vector = embed(symptoms)
 
@@ -20,17 +27,19 @@ def search_protocols(symptoms):
         FROM embeddings e
         JOIN protocols p ON e.protocol_id = p.protocol_id
         ORDER BY e.embedding <-> %s
-        LIMIT 3
-    """, (vector,))
+        LIMIT %s
+    """, (vector, TOP_K))
 
-    results = cursor.fetchall()
+    rows = cursor.fetchall()
 
-    return [
-        {
-            "protocol_id": r[0],
-            "title": r[1],
-            "icd_code": r[2],
-            "text": r[3]
-        }
-        for r in results
-    ]
+    results = []
+
+    for row in rows:
+        results.append({
+            "protocol_id": row[0],
+            "title": row[1],
+            "icd_code": row[2],
+            "text": row[3],
+        })
+
+    return results
