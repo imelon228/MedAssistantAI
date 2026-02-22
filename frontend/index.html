@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MedAssist AI</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <script src="/static/script.js"></script>
+</head>
+
+<body>
+
+    <div class="app-container">
+        <button class="menu-toggle" id="menu-toggle">☰</button>
+
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-top">
+                <div class="user-profile">
+                    <div class="profile-main">
+                        <div class="avatar-placeholder">U</div>
+                        <div class="profile-text">
+                            <span class="user-name">Иван Иванов</span>
+                            <span class="user-tier">Бесплатный тариф</span>
+                        </div>
+                    </div>
+                    <button type="button" class="new-account-btn">New Account</button>
+                </div>
+
+                <nav class="chat-history">
+                    <p class="section-title">Чаты</p>
+                    <div class="chat-item active">Какой-то там его чат</div>
+                    <div class="chat-item">Другой какой-то чат</div>
+                </nav>
+            </div>
+
+            <div class="sidebar-footer">
+                <div class="footer-item">Referral rewards</div>
+                <div class="footer-item">Suggest feature</div>
+                <div class="footer-item help-center">Help center</div>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <form class="form-card" id="diagnosis-form" novalidate>
+                <div class="input-grid">
+
+                    <div class="input-group">
+                        <label>Жалобы</label>
+                        <textarea name="complaints"
+                            placeholder='"кашель, температура T°C: 38.5, одышка..." logic'></textarea>
+                        <span class="error-message">Поле не заполнено</span>
+                    </div>
+
+                    <div class="input-group">
+                        <label>Витальные</label>
+                        <textarea name="vitals"
+                            placeholder="Температура: 38.2&#10;Артериальное давление: 130/85&#10;ЧСС: 95"></textarea>
+                        <span class="error-message">Поле не заполнено</span>
+                    </div>
+
+                    <div class="input-group">
+                        <label>Пациент, вес</label>
+                        <textarea name="patient_info" placeholder="Пациент: М, 45 лет&#10;Вес: 78 кг"></textarea>
+                        <span class="error-message">Поле не заполнено</span>
+                    </div>
+
+                    <div class="input-group">
+                        <label>Анализы</label>
+                        <textarea name="lab_results" placeholder="Лейкоциты 14.2*10^9&#10;СОЭ: 42"></textarea>
+                        <span class="error-message">Поле не заполнено</span>
+                    </div>
+
+                    <div class="input-group full-width">
+                        <label>Анамнез</label>
+                        <textarea name="anamnesis" placeholder="СД 2 типа, курит"></textarea>
+                        <span class="error-message">Поле не заполнено</span>
+                    </div>
+                </div>
+
+                <div class="button-wrapper">
+                    <button type="submit" class="submit-btn">Узнать диагноз</button>
+                </div>
+            </form>
+
+            <div id="ai-response-container"></div>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
