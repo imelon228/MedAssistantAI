@@ -1,0 +1,11 @@
+{
+  "submission_name": "test_run_chunked",
+  "total_protocols": 219,
+  "accuracy_at_1_percent": 2.28,
+  "recall_at_3_percent": 11.87,
+  "latency_avg_s": 6.763,
+  "latency_min_s": 0.003,
+  "latency_max_s": 30.122,
+  "latency_p50_s": 4.416,
+  "latency_p95_s": 18.255
+}
