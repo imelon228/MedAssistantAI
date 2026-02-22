@@ -14,3 +14,7 @@ ENV PYTHONUNBUFFERED=1
 EXPOSE 8000
 
 CMD ["uv", "run", "uvicorn", "src.main:app", "--host", "0.0.0.0", "--port", "8080"]
+
+ENV LLM_API_KEY=""
+ENV LLM_BASE_URL=""
+ENV LLM_MODEL=""

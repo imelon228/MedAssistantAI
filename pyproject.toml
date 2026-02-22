@@ -12,5 +12,9 @@ dependencies = [
     "uvicorn>=0.32.0",
     "sentence-transformers",
     "psycopg2-binary",
-    "numpy"
+    "numpy",
+    "tqdm>=4.67.3",
+    "openai>=2.21.0",
+    "python-dotenv>=1.2.1",
+    "requests>=2.32.5",
 ]
