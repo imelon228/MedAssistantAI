@@ -28,5 +28,8 @@ class Diagnosis(BaseModel):
 
 
 class DiagnoseResponse(BaseModel):
-
     diagnoses: List[Diagnosis]
+    severity_score: int
+    severity_level: str
+    severity_reasons: List[str]
+    emergency: dict | None = None

@@ -1,0 +1,652 @@
+:root {
+    --bg-dark: #121212;
+    --sidebar-bg: #1a1a1a;
+    --card-bg: #1e1e1e;
+    --input-bg: #2a2a2a;
+    /* Единый темно-голубой цвет */
+    --accent-color: #4481c0; 
+    --text-main: #ffffff;
+    --text-muted: #888888;
+    --error-red: #d32f2f;
+}
+
+/* Профиль пользователя */
+.profile-main {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+}
+
+* { box-sizing: border-box; }
+
+body {
+    margin: 0;
+    font-family: 'Inter', -apple-system, sans-serif;
+    background-color: var(--bg-dark);
+    color: var(--text-main);
+}
+
+.app-container {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* Сайдбар */
+.sidebar {
+    width: 280px;
+    background-color: var(--sidebar-bg);
+    padding: 25px;
+    border-right: 1px solid #222;
+    flex-shrink: 0;
+    transition: transform 0.3s ease;
+}
+
+.logo { font-size: 22px; margin-bottom: 35px; }
+.logo-accent { color: var(--accent-blue); }
+.section-title { color: var(--text-muted); font-size: 13px; font-weight: 700; letter-spacing: 1px; margin-bottom: 15px; }
+
+.chat-item {
+    padding: 12px 18px;
+    border-radius: 25px;
+    margin-bottom: 10px;
+    font-size: 14px;
+    cursor: pointer;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.chat-item.active {
+    background-color: rgba(68, 129, 192, 0.15); /* Прозрачный темно-голубой */
+    color: var(--accent-color);
+    border-left: 3px solid var(--accent-color);
+    border-radius: 0 20px 20px 0;
+}
+
+/* Кнопка меню для мобилок */
+.menu-toggle {
+    display: none;
+    position: fixed;
+    top: 15px; left: 15px;
+    z-index: 100;
+    background: var(--accent-blue);
+    border: none; color: white; padding: 10px; border-radius: 5px;
+}
+
+/* Контент */
+.main-content {
+    flex-grow: 1;
+    padding: 40px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.form-card {
+    background-color: var(--card-bg);
+    padding: 30px;
+    border-radius: 24px;
+    width: 100%;
+    max-width: 850px;
+}
+
+.input-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 25px;
+}
+
+.input-group { display: flex; flex-direction: column; }
+
+label { margin-bottom: 10px; font-size: 14px; color: #ddd; }
+
+textarea {
+    background-color: var(--input-bg);
+    border: 1.5px solid transparent;
+    border-radius: 15px;
+    padding: 15px;
+    color: white;
+    resize: none;
+    height: 110px;
+    font-size: 14px;
+    transition: border-color 0.2s;
+}
+
+textarea:focus { outline: none; border-color: var(--accent-blue); }
+
+/* Ошибки */
+.input-group.error textarea {
+    border-color: var(--error-red);
+}
+.error-message { color: var(--error-red); font-size: 12px; margin-top: 6px; display: none; }
+.input-group.error .error-message { display: block; }
+
+.button-wrapper {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 25px;
+}
+
+/* Ответ ИИ */
+.ai-answer {
+    margin-top: 30px;
+    max-width: 850px;
+    width: 100%;
+    display: flex;
+    gap: 15px;
+    padding: 10px;
+}
+
+.ai-icon {
+    width: 35px; height: 35px;
+    background: #333; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+
+.ai-text { font-size: 15px; line-height: 1.6; color: #ccc; }
+
+/* Hover */
+
+/* --- Стили для чатов в сайдбаре --- */
+.chat-item {
+    padding: 12px 18px;
+    border-radius: 25px;
+    margin-bottom: 10px;
+    font-size: 14px;
+    cursor: pointer;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    /* Плавный переход для всех свойств */
+    transition: all 0.2s ease-in-out; 
+    color: var(--text-muted);
+}
+
+/* Эффект при наведении на неактивный чат */
+.chat-item:hover:not(.active) {
+    background-color: rgba(255, 255, 255, 0.05);
+    color: var(--text-main);
+    padding-left: 22px; /* Легкое смещение вправо для динамики */
+}
+
+.chat-item.active {
+    background-color: #263850;
+    color: #90caf9;
+}
+
+/* --- Стили для кнопки --- */
+.submit-btn {
+    width: 100%;
+    max-width: 280px;
+    border-radius: 14px;
+    background-color: var(--accent-color);
+    color: white;
+    padding: 14px 28px;
+    border: none;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.submit-btn:hover {
+    filter: brightness(1.1);
+}
+
+.submit-btn:hover {
+    background-color: #5592d1; /* Чуть светлее основной синей */
+    box-shadow: 0 6px 15px rgba(68, 129, 192, 0.3); /* Синее свечение */
+    transform: translateY(-2px); /* Кнопка будто приподнимается */
+}
+
+.submit-btn:active {
+    transform: translateY(0); /* Возвращается на место при клике */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Дополнительно: hover для текстовых полей */
+textarea:hover {
+    border-color: rgba(68, 129, 192, 0.4);
+}
+
+/* Фиксация сайдбара на весь экран */
+.sidebar {
+    width: 260px;
+    height: 100vh; /* На всю высоту экрана */
+    position: fixed; /* Приклеиваем к левому краю */
+    left: 0;
+    top: 0;
+    background-color: var(--sidebar-bg);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Растягиваем контент между верхом и низом */
+    border-right: 1px solid #222;
+    z-index: 1000;
+}
+
+/* Сдвигаем основной контент, чтобы он не заходил под сайдбар */
+.main-content {
+    margin-left: 260px; 
+    width: calc(100% - 260px);
+    padding: 40px;
+}
+
+/* Профиль */
+.user-profile {
+    margin-bottom: 25px;
+}
+
+.profile-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+}
+
+.user-name {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-main);
+}
+.user-role { font-size: 11px; color: var(--text-muted); }
+
+.user-tier {
+    font-size: 11px;
+    color: var(--text-muted);
+    margin-top: 2px;
+}
+
+
+/* Миниатюрная синяя кнопка New Consult */
+.new-consult-btn {
+    width: 100%;
+    padding: 8px; /* Уменьшили отступы */
+    background-color: var(--accent-blue); /* Тот же синий */
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.new-consult-btn:hover {
+    filter: brightness(1.1);
+    transform: translateY(-1px);
+}
+
+/* Нижнее меню (компактное) */
+.sidebar-footer {
+    border-top: 1px solid #333;
+    padding-top: 10px;
+}
+
+.footer-item {
+    padding: 6px 10px; /* Меньше высота */
+    font-size: 12px; /* Меньше шрифт */
+    color: var(--text-muted);
+    cursor: pointer;
+    border-radius: 6px;
+    transition: all 0.2s;
+}
+
+.footer-item:hover {
+    color: white;
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.footer-item.help-center {
+    margin-top: 5px;
+    background-color: rgba(255, 255, 255, 0.08);
+}
+
+:root {
+    --bg-dark: #121212;
+    --sidebar-bg: #1a1a1a;
+    --card-bg: #1e1e1e;
+    --input-bg: #2a2a2a;
+    --accent-blue: #4481c0; /* Основной цвет из макета */
+    --text-main: #ffffff;
+    --text-muted: #888888;
+    --error-red: #d32f2f;
+}
+
+/* Сайдбар зафиксирован слева на всю высоту */
+.sidebar {
+    width: 260px;
+    height: 100vh;
+    position: fixed;
+    left: 0; top: 0;
+    background-color: var(--sidebar-bg);
+    padding: 24px 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-right: 1px solid #222;
+    z-index: 1000;
+}
+
+.profile-text {
+    display: flex;
+    flex-direction: column; /* Имя сверху, тариф строго снизу */
+}
+
+/* Аватар пользователя */
+.avatar-placeholder {
+    width: 36px;
+    height: 36px;
+    background: var(--input-bg);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--accent-color);
+    font-weight: bold;
+}
+
+/* СТИЛЬ КНОПКИ NEW ACCOUNT (Outline) */
+.new-account-btn {
+    width: 100%;
+    padding: 10px;
+    background: transparent;
+    border: 1.5px solid var(--accent-color);
+    color: var(--accent-color);
+    border-radius: 10px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.new-account-btn:hover {
+    background-color: var(--accent-color);
+    color: white;
+}
+
+/* Нижнее меню (компактное) */
+.sidebar-footer {
+    border-top: 1px solid #2a2a2a;
+    padding-top: 12px;
+}
+
+.footer-item {
+    padding: 8px 12px;
+    font-size: 12px;
+    color: var(--text-muted);
+    cursor: pointer;
+    border-radius: 6px;
+    transition: 0.2s;
+}
+
+.footer-item:hover {
+    color: white;
+    background: rgba(255, 255, 255, 0.05);
+}
+
+/* Основная область контента сдвинута вправо */
+.main-content {
+    margin-left: 260px;
+    width: calc(100% - 260px);
+    padding: 40px;
+}
+
+/* Валидация полей */
+.input-group.error textarea {
+    border: 1px solid var(--error-red);
+}
+
+.input-group.error .error-message {
+    display: block;
+    color: var(--error-red);
+    font-size: 11px;
+    margin-top: 4px;
+}
+
+/* Адаптивность для мобильных */
+@media (max-width: 768px) {
+    .sidebar {
+        transform: translateX(-100%);
+    }
+    .main-content {
+        margin-left: 0;
+        width: 100%;
+    }
+    .sidebar.open {
+        transform: translateX(0);
+    }
+}
+
+:root {
+    --bg-dark: #121212;
+    --sidebar-bg: #1a1a1a;
+    --card-bg: #1e1e1e;
+    --input-bg: #2a2a2a;
+    --accent-color: #4481c0; 
+    --text-main: #ffffff;
+    --text-muted: #888888;
+    --error-red: #ff5252;
+    --success-green: #00ff66;
+}
+
+* { box-sizing: border-box; }
+
+body {
+    margin: 0;
+    font-family: 'Inter', -apple-system, sans-serif;
+    background-color: var(--bg-dark);
+    color: var(--text-main);
+}
+
+.app-container {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* Сайдбар */
+.sidebar {
+    width: 280px;
+    background-color: var(--sidebar-bg);
+    padding: 25px;
+    border-right: 1px solid #222;
+    flex-shrink: 0;
+    transition: 0.3s;
+}
+
+.main-content {
+    flex-grow: 1;
+    padding: 40px;
+}
+
+/* Стили формы */
+.input-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.input-group.full-width { grid-column: span 2; }
+
+label {
+    font-size: 14px;
+    margin-bottom: 8px;
+    color: var(--text-muted);
+}
+
+textarea {
+    background: var(--input-bg);
+    border: 1px solid #333;
+    border-radius: 12px;
+    padding: 15px;
+    color: white;
+    resize: none;
+    height: 100px;
+    font-size: 14px;
+}
+
+.submit-btn {
+    background: var(--accent-color);
+    color: white;
+    border: none;
+    padding: 15px 40px;
+    border-radius: 30px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+/* Шапка с карточками */
+.diagnosis-header {
+    display: flex;
+    gap: 20px;
+    width: 100%; /* Занимает всю доступную ширину родителя */
+    box-sizing: border-box; /* Важно: чтобы padding не расширял блок */
+    align-items: stretch;
+    margin-top: 50px;
+}
+
+/* Карточки */
+.info-card {
+    background-color: rgba(255, 255, 255, 0.05);
+    padding: 25px;
+    border-radius: 20px;
+    flex: 1; /* Равномерно распределяем место */
+    min-width: 0; /* Позволяет флекс-элементу сжиматься меньше содержимого */
+    word-wrap: break-word; /* Чтобы длинные слова не распирали карточку */
+}
+
+.card-label {
+    font-size: 14px;
+    color: var(--text-muted);
+    margin-bottom: 10px;
+}
+
+.card-value {
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1.4;
+}
+
+.warning-text {
+    color: var(--error-red);
+}
+
+/* Секция точности */
+.accuracy-section {
+    background-color: rgba(255, 255, 255, 0.03);
+    padding: 20px;
+    border-radius: 20px;
+    flex: 0 0 auto; /* Не дает кругу растягиваться или сжиматься */
+    width: 160px;   /* Фиксированная ширина для зоны с кругом */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.accuracy-label {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-bottom: 10px;
+}
+
+/* Круговой прогресс */
+.circular-progress {
+    position: relative;
+    width: 100px;
+    height: 100px;
+}
+
+.circular-progress svg {
+    transform: rotate(-90deg);
+}
+
+.bg-circle {
+    fill: none;
+    stroke: rgba(255, 255, 255, 0.1);
+    stroke-width: 8;
+}
+
+.progress-circle {
+    fill: none;
+    stroke: var(--success-green);
+    stroke-width: 8;
+    stroke-linecap: round;
+    transition: stroke-dashoffset 1s ease-out;
+}
+
+.percentage-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 20px;
+    font-weight: 800;
+    color: var(--success-green);
+}
+
+.ai-answer {
+    display: flex;
+    gap: 20px;
+    background: rgba(68, 129, 192, 0.05);
+    padding: 25px;
+    border-radius: 20px;
+}
+
+.results-wrapper {
+    max-width: 900px; /* Установите ту ширину, которая вам нужна для всего блока */
+    width: 100%;
+    margin: 0 auto; /* Центрируем, если нужно */
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+#ai-response-container{
+    max-width: 850px;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Адаптация для мобилок: когда 3 колонки в ряд уже не лезут */
+@media (max-width: 768px) {
+    .diagnosis-header {
+        flex-direction: column; /* Складываем карточки в стопку */
+    }
+    
+    .accuracy-section {
+        width: 100%; /* На мобилках круг на всю ширину */
+    }
+}
+
+/* АДАПТИВНОСТЬ */
+@media (max-width: 900px) {
+    .input-grid { grid-template-columns: 1fr; } /* Все поля в одну колонку */
+    .submit-btn { max-width: 100%; } /* Кнопка на всю ширину */
+}
+
+@media (max-width: 768px) {
+    .sidebar {
+        position: fixed;
+        left: 0; top: 0; bottom: 0;
+        transform: translateX(-100%); /* Прячем сайдбар */
+        z-index: 99;
+    }
+    .sidebar.open { transform: translateX(0); }
+    .menu-toggle { display: block; }
+    .main-content { padding-top: 70px; }
+}

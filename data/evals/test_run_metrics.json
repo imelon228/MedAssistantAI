@@ -1,11 +1,11 @@
 {
   "submission_name": "test_run",
-  "total_protocols": 219,
-  "accuracy_at_1_percent": 2.28,
-  "recall_at_3_percent": 16.89,
-  "latency_avg_s": 6.247,
+  "total_protocols": 209,
+  "accuracy_at_1_percent": 14.35,
+  "recall_at_3_percent": 60.77,
+  "latency_avg_s": 22.382,
   "latency_min_s": 0.003,
-  "latency_max_s": 37.222,
-  "latency_p50_s": 3.511,
-  "latency_p95_s": 19.276
+  "latency_max_s": 59.065,
+  "latency_p50_s": 21.489,
+  "latency_p95_s": 35.328
 }
