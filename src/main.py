@@ -37,10 +37,6 @@ def diagnose(request: dict):
 
     try:
 
-        # =========================
-        # 1️⃣ Универсальный вход
-        # =========================
-
         if "text" in request:
             # это evaluate.py
             symptoms = request["text"]
@@ -62,7 +58,7 @@ def diagnose(request: dict):
             Анамнез: {request.get("anamnesis")}
             """
 
-            # можно потом парсить реальные значения
+            # можно потом парсить 
             age = request.get("age")
             temperature = request.get("temperature")
             systolic_bp = request.get("systolic_bp")
@@ -73,10 +69,7 @@ def diagnose(request: dict):
         if not symptoms.strip():
             return DiagnoseResponse(diagnoses=[])
 
-        # =========================
-        # 2️⃣ Vector search
-        # =========================
-
+    
         protocols = search_protocols(symptoms)
 
         if not protocols:
@@ -122,10 +115,6 @@ def diagnose(request: dict):
                     )
                 )
 
-        # =========================
-        # 3️⃣ Severity
-        # =========================
-
         severity = calculate_severity({
             "temperature": temperature,
             "systolic_bp": systolic_bp,
@@ -147,9 +136,6 @@ def diagnose(request: dict):
                 "ambulance_number": "103"
             }
 
-        # =========================
-        # 4️⃣ RETURN
-        # =========================
 
         return DiagnoseResponse(
             diagnoses=diagnoses,
